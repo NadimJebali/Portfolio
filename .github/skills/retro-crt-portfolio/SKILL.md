@@ -1,12 +1,13 @@
 ---
 name: retro-crt-portfolio
-description: 'Build and extend a React retro CRT PC desktop portfolio. Use when: adding components, windows, desktop icons, apps, CRT effects, taskbar features, sound effects, or wiring state for this portfolio project. Covers CRT overlay rules, window management, desktop icon dragging, React Context state, coding conventions, and aesthetic guidelines for a Windows 95/98-style browser portfolio.'
+description: "Build and extend a React retro CRT PC desktop portfolio. Use when: adding components, windows, desktop icons, apps, CRT effects, taskbar features, sound effects, or wiring state for this portfolio project. Covers CRT overlay rules, window management, desktop icon dragging, React Context state, coding conventions, and aesthetic guidelines for a Windows 95/98-style browser portfolio."
 argument-hint: 'Describe the feature or component to build (e.g. "add an About window", "new desktop icon for GitHub")'
 ---
 
 # Retro CRT PC Portfolio
 
 ## When to Use
+
 - Adding a new desktop icon or window/app
 - Implementing or modifying the CRT overlay effect
 - Wiring up window state, z-index management, or taskbar entries
@@ -92,6 +93,7 @@ src/
 ## State Management
 
 Global React Context provides:
+
 - `windows` — array of window state objects (shape above)
 - `openWindow(id)` / `closeWindow(id)` / `minimizeWindow(id)`
 - `bringToFront(id)` — increments zIndex for the target window
@@ -113,17 +115,17 @@ No Redux or external state libraries.
 
 ## Coding Conventions
 
-| Rule | Detail |
-|------|--------|
-| Components | Functional + hooks only — no class components |
-| Exports | Named exports everywhere; default only in `App.jsx` |
-| Hooks | Live in `/hooks/`, prefixed `use` |
-| CSS classes | kebab-case (e.g., `crt-overlay`, `desktop-icon`) |
-| Layout | Tailwind utilities |
-| UI chrome | `98.css` / `XP.css` classes |
-| Inline styles | Only for dynamically computed values |
-| Personal data | All in `config.js` — never hardcoded in components |
-| TypeScript | JS/JSX only unless explicitly requested |
+| Rule          | Detail                                              |
+| ------------- | --------------------------------------------------- |
+| Components    | Functional + hooks only — no class components       |
+| Exports       | Named exports everywhere; default only in `App.jsx` |
+| Hooks         | Live in `/hooks/`, prefixed `use`                   |
+| CSS classes   | kebab-case (e.g., `crt-overlay`, `desktop-icon`)    |
+| Layout        | Tailwind utilities                                  |
+| UI chrome     | `98.css` / `XP.css` classes                         |
+| Inline styles | Only for dynamically computed values                |
+| Personal data | All in `config.js` — never hardcoded in components  |
+| TypeScript    | JS/JSX only unless explicitly requested             |
 
 ---
 

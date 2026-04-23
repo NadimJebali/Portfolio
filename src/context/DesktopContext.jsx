@@ -1,10 +1,10 @@
-import { createContext, useContext, useReducer, useCallback } from 'react';
+import { createContext, useContext, useReducer, useCallback } from "react";
 
 // --- Initial window definitions ---
 const initialWindows = [
   {
-    id: 'about-window',
-    title: 'About Me',
+    id: "about-window",
+    title: "About Me",
     isOpen: false,
     isMinimized: false,
     position: { x: 80, y: 60 },
@@ -12,8 +12,8 @@ const initialWindows = [
     zIndex: 10,
   },
   {
-    id: 'cv-window',
-    title: 'My CV',
+    id: "cv-window",
+    title: "My CV",
     isOpen: false,
     isMinimized: false,
     position: { x: 160, y: 100 },
@@ -21,8 +21,8 @@ const initialWindows = [
     zIndex: 10,
   },
   {
-    id: 'links-window',
-    title: 'Links',
+    id: "links-window",
+    title: "Links",
     isOpen: false,
     isMinimized: false,
     position: { x: 240, y: 140 },
@@ -34,46 +34,46 @@ const initialWindows = [
 // --- Reducer ---
 function desktopReducer(state, action) {
   switch (action.type) {
-    case 'OPEN_WINDOW':
+    case "OPEN_WINDOW":
       return {
         ...state,
         topZ: state.topZ + 1,
         windows: state.windows.map((w) =>
           w.id === action.id
             ? { ...w, isOpen: true, isMinimized: false, zIndex: state.topZ + 1 }
-            : w
+            : w,
         ),
       };
-    case 'CLOSE_WINDOW':
+    case "CLOSE_WINDOW":
       return {
         ...state,
         windows: state.windows.map((w) =>
-          w.id === action.id ? { ...w, isOpen: false, isMinimized: false } : w
+          w.id === action.id ? { ...w, isOpen: false, isMinimized: false } : w,
         ),
       };
-    case 'MINIMIZE_WINDOW':
+    case "MINIMIZE_WINDOW":
       return {
         ...state,
         windows: state.windows.map((w) =>
-          w.id === action.id ? { ...w, isMinimized: true } : w
+          w.id === action.id ? { ...w, isMinimized: true } : w,
         ),
       };
-    case 'BRING_TO_FRONT':
+    case "BRING_TO_FRONT":
       return {
         ...state,
         topZ: state.topZ + 1,
         windows: state.windows.map((w) =>
-          w.id === action.id ? { ...w, zIndex: state.topZ + 1 } : w
+          w.id === action.id ? { ...w, zIndex: state.topZ + 1 } : w,
         ),
       };
-    case 'UPDATE_WINDOW':
+    case "UPDATE_WINDOW":
       return {
         ...state,
         windows: state.windows.map((w) =>
-          w.id === action.id ? { ...w, ...action.patch } : w
+          w.id === action.id ? { ...w, ...action.patch } : w,
         ),
       };
-    case 'TOGGLE_MUTE':
+    case "TOGGLE_MUTE":
       return { ...state, isMuted: !state.isMuted };
     default:
       return state;
@@ -90,12 +90,27 @@ export function DesktopProvider({ children }) {
     isMuted: false,
   });
 
-  const openWindow = useCallback((id) => dispatch({ type: 'OPEN_WINDOW', id }), []);
-  const closeWindow = useCallback((id) => dispatch({ type: 'CLOSE_WINDOW', id }), []);
-  const minimizeWindow = useCallback((id) => dispatch({ type: 'MINIMIZE_WINDOW', id }), []);
-  const bringToFront = useCallback((id) => dispatch({ type: 'BRING_TO_FRONT', id }), []);
-  const updateWindow = useCallback((id, patch) => dispatch({ type: 'UPDATE_WINDOW', id, patch }), []);
-  const toggleMute = useCallback(() => dispatch({ type: 'TOGGLE_MUTE' }), []);
+  const openWindow = useCallback(
+    (id) => dispatch({ type: "OPEN_WINDOW", id }),
+    [],
+  );
+  const closeWindow = useCallback(
+    (id) => dispatch({ type: "CLOSE_WINDOW", id }),
+    [],
+  );
+  const minimizeWindow = useCallback(
+    (id) => dispatch({ type: "MINIMIZE_WINDOW", id }),
+    [],
+  );
+  const bringToFront = useCallback(
+    (id) => dispatch({ type: "BRING_TO_FRONT", id }),
+    [],
+  );
+  const updateWindow = useCallback(
+    (id, patch) => dispatch({ type: "UPDATE_WINDOW", id, patch }),
+    [],
+  );
+  const toggleMute = useCallback(() => dispatch({ type: "TOGGLE_MUTE" }), []);
 
   return (
     <DesktopContext.Provider
@@ -117,6 +132,6 @@ export function DesktopProvider({ children }) {
 
 export function useDesktop() {
   const ctx = useContext(DesktopContext);
-  if (!ctx) throw new Error('useDesktop must be used within a DesktopProvider');
+  if (!ctx) throw new Error("useDesktop must be used within a DesktopProvider");
   return ctx;
 }

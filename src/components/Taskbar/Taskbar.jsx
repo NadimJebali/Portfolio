@@ -1,5 +1,9 @@
-import { useState, useEffect } from 'react';
-import { useDesktop } from '../../context/DesktopContext';
+import { useState, useEffect } from "react";
+import { useDesktop } from "../../context/DesktopContext";
+import { config } from "../../config";
+
+const { taskbarHeight = 42 } = config.desktop;
+const btnHeight = taskbarHeight - 12;
 
 function Clock() {
   const [time, setTime] = useState(() => new Date());
@@ -11,10 +15,15 @@ function Clock() {
 
   return (
     <span
-      style={{ fontFamily: "'VT323', monospace", fontSize: '1.1rem', color: '#d0ffd0', padding: '0 8px' }}
+      style={{
+        fontFamily: "'VT323', monospace",
+        fontSize: "1.15rem",
+        color: "#111111",
+        padding: "0 8px",
+      }}
       aria-label="Current time"
     >
-      {time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+      {time.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
     </span>
   );
 }
@@ -29,23 +38,23 @@ export function Taskbar() {
       role="toolbar"
       aria-label="Taskbar"
       style={{
-        position: 'fixed',
+        position: "fixed",
         bottom: 0,
         left: 0,
         right: 0,
-        height: '36px',
-        background: '#c0c0c0',
-        borderTop: '2px solid #ffffff',
-        display: 'flex',
-        alignItems: 'center',
-        gap: '4px',
-        padding: '0 4px',
+        height: `${taskbarHeight}px`,
+        background: "#c0c0c0",
+        borderTop: "2px solid #ffffff",
+        display: "flex",
+        alignItems: "center",
+        gap: "4px",
+        padding: "0 4px",
         zIndex: 9000,
-        boxShadow: 'inset 0 2px 0 #ffffff, inset 0 -2px 0 #808080',
+        boxShadow: "inset 0 2px 0 #ffffff, inset 0 -2px 0 #808080",
       }}
     >
       {/* Minimized window buttons */}
-      <div style={{ flex: 1, display: 'flex', gap: '4px' }}>
+      <div style={{ flex: 1, display: "flex", gap: "4px" }}>
         {minimized.map((w) => (
           <button
             key={w.id}
@@ -53,12 +62,12 @@ export function Taskbar() {
             onClick={() => openWindow(w.id)}
             style={{
               fontFamily: "'VT323', monospace",
-              fontSize: '0.9rem',
-              minWidth: '100px',
-              height: '26px',
-              overflow: 'hidden',
-              textOverflow: 'ellipsis',
-              whiteSpace: 'nowrap',
+              fontSize: "1rem",
+              minWidth: "110px",
+              height: `${btnHeight}px`,
+              overflow: "hidden",
+              textOverflow: "ellipsis",
+              whiteSpace: "nowrap",
             }}
           >
             {w.title}
@@ -68,29 +77,29 @@ export function Taskbar() {
 
       {/* Mute toggle */}
       <button
-        aria-label={isMuted ? 'Unmute sounds' : 'Mute sounds'}
+        aria-label={isMuted ? "Unmute sounds" : "Mute sounds"}
         onClick={toggleMute}
         style={{
           fontFamily: "'VT323', monospace",
-          fontSize: '1.1rem',
-          width: '32px',
-          height: '26px',
-          cursor: 'pointer',
+          fontSize: "1.2rem",
+          width: "36px",
+          height: `${btnHeight}px`,
+          cursor: "pointer",
         }}
-        title={isMuted ? 'Unmute' : 'Mute'}
+        title={isMuted ? "Unmute" : "Mute"}
       >
-        {isMuted ? '🔇' : '🔊'}
+        {isMuted ? "🔇" : "🔊"}
       </button>
 
       {/* Clock */}
       <div
         style={{
-          background: '#c0c0c0',
-          border: '2px inset #808080',
-          padding: '0 4px',
-          height: '26px',
-          display: 'flex',
-          alignItems: 'center',
+          background: "#c0c0c0",
+          border: "2px inset #808080",
+          padding: "0 4px",
+          height: `${btnHeight}px`,
+          display: "flex",
+          alignItems: "center",
         }}
       >
         <Clock />

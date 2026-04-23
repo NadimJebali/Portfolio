@@ -1,17 +1,17 @@
-import { config } from '../../config';
+import { config } from "../../config";
 
 const linkStyle = {
-  display: 'block',
-  color: '#ffb000',
+  display: "block",
+  color: "#0000cc",
   fontFamily: "'VT323', monospace",
-  fontSize: '1.2rem',
-  textDecoration: 'none',
-  padding: '0.3rem 0',
+  fontSize: "1.2rem",
+  textDecoration: "none",
+  padding: "0.3rem 0",
 };
 
 export function LinksApp() {
   return (
-    <div style={{ padding: '0.5rem' }}>
+    <div style={{ padding: "0.5rem" }}>
       {Object.entries(config.links).map(([label, url]) => (
         <a
           key={label}
