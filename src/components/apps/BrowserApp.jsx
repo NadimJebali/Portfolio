@@ -95,7 +95,13 @@ export function BrowserApp({ url }) {
           target="_blank"
           rel="noopener noreferrer"
           aria-label="Open in real browser"
-          style={{ ...btnStyle, textDecoration: "none" }}
+          style={{
+            ...btnStyle,
+            textDecoration: "none",
+            fontSize: "1.4rem",
+            lineHeight: 1,
+            padding: "0px 8px",
+          }}
           title="Open in browser"
         >
           ↗
@@ -122,6 +128,7 @@ export function BrowserApp({ url }) {
               alignItems: "center",
               justifyContent: "flex-start",
               background: "#e0e0e0",
+              position: "relative",
             }}
           >
             <p
@@ -129,7 +136,7 @@ export function BrowserApp({ url }) {
                 fontFamily: "'VT323', monospace",
                 fontSize: "0.9rem",
                 color: "#555",
-                margin: "6px 0 4px",
+                margin: "6px 0 8px",
               }}
             >
               [Screenshot preview via microlink.io]
@@ -140,6 +147,24 @@ export function BrowserApp({ url }) {
               alt={`Preview of ${url}`}
               style={{ maxWidth: "100%", border: "1px solid #808080" }}
             />
+            <div
+              style={{
+                position: "sticky",
+                bottom: "8px",
+                alignSelf: "flex-end",
+                marginRight: "8px",
+                fontFamily: "'VT323', monospace",
+                fontSize: "1.25rem",
+                background: "rgba(192,192,192,0.9)",
+                border: "1px solid #808080",
+                padding: "2px 8px",
+                color: "#333",
+                pointerEvents: "none",
+                marginTop: "8px",
+              }}
+            >
+              To visit the site, click the ↗ button above.
+            </div>
           </div>
         )}
         {mode === "iframe" && (
@@ -156,7 +181,7 @@ export function BrowserApp({ url }) {
                 bottom: "8px",
                 right: "8px",
                 fontFamily: "'VT323', monospace",
-                fontSize: "0.8rem",
+                fontSize: "1.25rem",
                 background: "rgba(192,192,192,0.9)",
                 border: "1px solid #808080",
                 padding: "2px 6px",
@@ -164,7 +189,9 @@ export function BrowserApp({ url }) {
                 pointerEvents: "none",
               }}
             >
-              Some sites block embedding. Use 📷 or ↗ if blank.
+              Some sites block embedding. Use ↗ if blank
+              <br />
+              to visit the site.
             </div>
           </>
         )}
