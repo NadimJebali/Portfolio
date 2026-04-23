@@ -1,0 +1,50 @@
+@import "tailwindcss";
+@import "98.css";
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #0a0a0a;
+}
+
+body {
+  font-family: 'VT323', monospace;
+  color: #33ff33;
+}
+
+/* CRT flicker keyframes */
+@keyframes crt-flicker {
+  0%   { opacity: 0.97; }
+  5%   { opacity: 1.0;  }
+  10%  { opacity: 0.98; }
+  15%  { opacity: 1.0;  }
+  50%  { opacity: 0.99; }
+  75%  { opacity: 1.0;  }
+  100% { opacity: 0.97; }
+}
+
+/* Phosphor glow on the whole desktop */
+.crt-screen {
+  filter: brightness(1.05) contrast(1.1);
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+/* Disable flicker for reduced-motion users */
+@media (prefers-reduced-motion: reduce) {
+  .crt-flicker { animation: none !important; }
+}
+
+/* Override 98.css to keep title bars legible on dark bg */
+.window .title-bar {
+  font-family: 'VT323', monospace;
+  font-size: 1rem;
+}
