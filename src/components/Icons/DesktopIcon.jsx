@@ -59,6 +59,8 @@ export function DesktopIcon({ id, label, icon, emoji, defaultPos }) {
           <img
             src={icon}
             alt={label}
+            draggable="false"
+            onDragStart={(e) => e.preventDefault()}
             style={{
               width: `${iconSize}px`,
               height: `${iconSize}px`,

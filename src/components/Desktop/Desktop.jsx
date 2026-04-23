@@ -4,6 +4,7 @@ import { Window } from "../Window/Window";
 import { AboutApp } from "../apps/AboutApp";
 import { CVApp } from "../apps/CVApp";
 import { LinksApp } from "../apps/LinksApp";
+import { BrowserApp } from "../apps/BrowserApp";
 import { config } from "../../config";
 
 const APP_MAP = {
@@ -50,6 +51,21 @@ export function Desktop() {
       {windows
         .filter((w) => w.isOpen && !w.isMinimized)
         .map((w) => {
+          // Dynamic browser windows
+          if (w.meta?.type === "browser") {
+            return (
+              <Window
+                key={w.id}
+                id={w.id}
+                title={w.title}
+                zIndex={w.zIndex}
+                position={w.position}
+                size={w.size}
+              >
+                <BrowserApp url={w.meta.url} />
+              </Window>
+            );
+          }
           const AppContent = APP_MAP[w.id];
           return AppContent ? (
             <Window

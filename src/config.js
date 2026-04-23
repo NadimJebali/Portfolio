@@ -5,8 +5,8 @@ export const config = {
   email: "NadimJebali.0@gmail.com",
   cv: "/assets/CV_NADIM_JEBALI_web.pdf",
   links: {
-    github: "https://github.com/yourusername",
-    linkedin: "https://linkedin.com/in/yourusername",
+    github: "https://github.com/NadimJebali",
+    linkedin: "https://www.linkedin.com/in/nadim-jebali-787592211/",
   },
   desktop: {
     wallpaperColor: "#0a0a12", // fallback colour when no image is set
@@ -28,14 +28,14 @@ export const config = {
       {
         id: "cv-window",
         label: "My CV",
-        icon: null, // e.g. "./assets/cv-icon.png"
+        icon: "/assets/pdf-icon.png", // e.g. "./assets/cv-icon.png"
         emoji: "📄",
         defaultPos: { x: 24, y: 120 },
       },
       {
         id: "links-window",
         label: "Links",
-        icon: null, // e.g. "./assets/links-icon.png"
+        icon: "/assets/links-icon.png", // e.g. "./assets/links-icon.png"
         emoji: "🔗",
         defaultPos: { x: 24, y: 216 },
       },

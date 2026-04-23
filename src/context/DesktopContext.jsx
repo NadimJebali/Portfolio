@@ -75,6 +75,32 @@ function desktopReducer(state, action) {
       };
     case "TOGGLE_MUTE":
       return { ...state, isMuted: !state.isMuted };
+    case "ADD_WINDOW": {
+      const newWin = {
+        id: action.window.id,
+        title: action.window.title,
+        isOpen: true,
+        isMinimized: false,
+        position: action.window.position ?? {
+          x: 120 + (state.topZ % 8) * 20,
+          y: 80 + (state.topZ % 8) * 20,
+        },
+        size: action.window.size ?? { width: 700, height: 520 },
+        zIndex: state.topZ + 1,
+        meta: action.window.meta ?? {},
+      };
+      // Replace if same id already exists, otherwise append
+      const exists = state.windows.find((w) => w.id === newWin.id);
+      return {
+        ...state,
+        topZ: state.topZ + 1,
+        windows: exists
+          ? state.windows.map((w) =>
+              w.id === newWin.id ? { ...w, ...newWin } : w,
+            )
+          : [...state.windows, newWin],
+      };
+    }
     default:
       return state;
   }
@@ -112,6 +138,18 @@ export function DesktopProvider({ children }) {
   );
   const toggleMute = useCallback(() => dispatch({ type: "TOGGLE_MUTE" }), []);
 
+  const openBrowserWindow = useCallback((url, title) => {
+    dispatch({
+      type: "ADD_WINDOW",
+      window: {
+        id: `browser-${Date.now()}`,
+        title: title ?? url,
+        size: { width: 720, height: 520 },
+        meta: { type: "browser", url },
+      },
+    });
+  }, []);
+
   return (
     <DesktopContext.Provider
       value={{
@@ -123,6 +161,7 @@ export function DesktopProvider({ children }) {
         bringToFront,
         updateWindow,
         toggleMute,
+        openBrowserWindow,
       }}
     >
       {children}
